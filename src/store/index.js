@@ -32,7 +32,7 @@ const todoSlices = createSlice({
 });
 
 const store = configureStore({
-  reducer: { tasksmanager: todoSlices.reducer }
+  reducer: { taskmanager: todoSlices.reducer }
 });
 export const todoActions = todoSlices.actions;
 export default store;
