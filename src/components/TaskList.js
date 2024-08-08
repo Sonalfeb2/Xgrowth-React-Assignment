@@ -19,27 +19,30 @@ const TaskList = () => {
     <Container>
       <Row className="justify-content-md-center">
         <Col xs={12} md={8}>
-          <ListGroup>
-            {tasks.map(task =>
-              <ListGroup.Item
-                key={task.id}
-                className="d-flex justify-content-between align-items-center"
-              >
-                <Form.Check
-                  type="checkbox"
-                  label={task.text}
-                  checked={task.completed}
-                  onChange={() => dispatch(taskActions.completeTask(task.id))}
-                />
-                <Button
-                  variant="danger"
-                  onClick={() => dispatch(taskActions.deleteTask(task.id))}
-                >
-                  Delete
-                </Button>
-              </ListGroup.Item>
-            )}
-          </ListGroup>
+          {tasks.length === 0
+            ? <p>No Task Present....</p>
+            : <ListGroup>
+                {tasks.map(task =>
+                  <ListGroup.Item
+                    key={task.id}
+                    className="d-flex justify-content-between align-items-center"
+                  >
+                    <Form.Check
+                      type="checkbox"
+                      label={task.text}
+                      checked={task.completed}
+                      onChange={() =>
+                        dispatch(taskActions.completeTask(task.id))}
+                    />
+                    <Button
+                      variant="danger"
+                      onClick={() => dispatch(taskActions.deleteTask(task.id))}
+                    >
+                      Delete
+                    </Button>
+                  </ListGroup.Item>
+                )}
+              </ListGroup>}
         </Col>
       </Row>
     </Container>
