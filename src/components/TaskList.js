@@ -4,7 +4,16 @@ import { ListGroup, Container, Row, Col, Form, Button } from "react-bootstrap";
 import { taskActions } from "../store";
 
 const TaskList = () => {
-  const tasks = useSelector(state => state.taskmanager.tasks);
+  const tasks = useSelector(state => {
+    const { tasks, filter } = state.taskmanager;
+    if (filter === "active") {
+      return tasks.filter(list => list.completed === false);
+    } else if (filter === "completed") {
+      return tasks.filter(list => list.completed === true);
+    } else {
+      return tasks;
+    }
+  });
   const dispatch = useDispatch();
   return (
     <Container>
@@ -20,9 +29,14 @@ const TaskList = () => {
                   type="checkbox"
                   label={task.text}
                   checked={task.completed}
-                  onChange={()=>dispatch(taskActions.completeTask(task.id))}
+                  onChange={() => dispatch(taskActions.completeTask(task.id))}
                 />
-                <Button variant="danger" onClick={()=>dispatch(taskActions.deleteTask(task.id))}>Delete</Button>
+                <Button
+                  variant="danger"
+                  onClick={() => dispatch(taskActions.deleteTask(task.id))}
+                >
+                  Delete
+                </Button>
               </ListGroup.Item>
             )}
           </ListGroup>

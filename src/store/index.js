@@ -40,6 +40,10 @@ const taskSlices = createSlice({
       state.tasks = task
 
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
+    },
+    filterTask : (state,action)=>{
+      state.filter = action.payload;
+      
     }
   }
 });
