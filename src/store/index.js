@@ -16,7 +16,7 @@ const initialState = {
   filter: "all"
 };
 
-const todoSlices = createSlice({
+const taskSlices = createSlice({
   name: "taskmanager",
   initialState,
   reducers: {
@@ -45,7 +45,7 @@ const todoSlices = createSlice({
 });
 
 const store = configureStore({
-  reducer: { taskmanager: todoSlices.reducer }
+  reducer: { taskmanager: taskSlices.reducer }
 });
-export const todoActions = todoSlices.actions;
+export const taskActions = taskSlices.actions;
 export default store;

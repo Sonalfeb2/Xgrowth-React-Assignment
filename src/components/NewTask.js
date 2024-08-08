@@ -1,16 +1,16 @@
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { todoActions } from "../store";
+import { taskActions } from "../store";
 
-const NewTodo = () => {
+const NewTask = () => {
   const dispatch = useDispatch();
-  const newTodoInput = useRef("");
+  const newTaskInput = useRef("");
   const handleSubmit = e => {
     e.preventDefault();
-    const text = newTodoInput.current.value;
-    dispatch(todoActions.addTask(text))
-    newTodoInput.current.value = "";
+    const text = newTaskInput.current.value;
+    dispatch(taskActions.addTask(text))
+    newTaskInput.current.value = "";
   };
   return (
     <Container>
@@ -20,8 +20,8 @@ const NewTodo = () => {
             <Form.Control
               type="text"
               placeholder="Enter a new task..."
-              value={newTodoInput.current.value}
-              ref={newTodoInput}
+              value={newTaskInput.current.value}
+              ref={newTaskInput}
               required
             />
             <Button type="submit" variant="primary" className="ml-2">
@@ -34,4 +34,4 @@ const NewTodo = () => {
   );
 };
 
-export default NewTodo;
+export default NewTask;
