@@ -27,6 +27,14 @@ const todoSlices = createSlice({
         completed: false
       });
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
+    },
+    completeTask: (state, action) => {
+      const task = state.tasks.find(task => task.id === action.payload);
+      if (task) {
+        task.completed = !task.completed;
+      }
+      
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
     }
   }
 });
