@@ -33,7 +33,12 @@ const todoSlices = createSlice({
       if (task) {
         task.completed = !task.completed;
       }
-      
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+    },
+    deleteTask: (state, action) => {
+      const task = state.tasks.filter(task => task.id !== action.payload);
+      state.tasks = task
+
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     }
   }

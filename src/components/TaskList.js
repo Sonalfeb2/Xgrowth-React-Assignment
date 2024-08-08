@@ -22,7 +22,7 @@ const TaskList = () => {
                   checked={task.completed}
                   onChange={()=>dispatch(todoActions.completeTask(task.id))}
                 />
-                <Button variant="danger">Delete</Button>
+                <Button variant="danger" onClick={()=>dispatch(todoActions.deleteTask(task.id))}>Delete</Button>
               </ListGroup.Item>
             )}
           </ListGroup>
