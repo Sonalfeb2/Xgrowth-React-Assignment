@@ -11,35 +11,48 @@ const NewTask = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const text = newTaskInput.current.value;
+    dispatch(taskActions.addTask(text));
+    newTaskInput.current.value = " ";
+  };
+  const handleChange = () => {
+    console.log("hi");
+    const text = newTaskInput.current.value;
     if (!inputValidation.test(text)) {
       setError(true);
-      setTimeout(() => {
-        setError(false);
-      }, 6000);
-      return;
+    } else {
+      setError(false);
     }
-    dispatch(taskActions.addTask(text));
-    newTaskInput.current.value = "";
   };
   return (
     <Container className="mb-4">
       <Row className="justify-content-md-center">
         <Col xs={12} md={8}>
-          <Form className="d-flex  needs-validation " onSubmit={handleSubmit} noValidate>
+          <Form
+            className="d-flex  needs-validation "
+            onSubmit={handleSubmit}
+            noValidate
+          >
             <Form.Control
-              className = {"rounded-0 " + (isError ? 'border-danger' : '')}
+              className={"rounded-0 " + (isError ? "border-danger" : "")}
               type="text"
               placeholder="Enter a new task..."
-              value={newTaskInput.current.value}
               ref={newTaskInput}
+              onChange={handleChange}
             />
-            <Button type="submit" variant="primary" className="ml-2 rounded-0">
+            <Button
+              type="submit"
+              variant="primary"
+              className="ml-2 rounded-0"
+              disabled={isError ? true : false}
+            >
               Add
             </Button>
           </Form>
         </Col>
       </Row>
-      <div className={isError?'d-block text-danger text-center mb-1':'d-none'}>
+      <div
+        className={isError ? "d-block text-danger text-center mb-1" : "d-none"}
+      >
         Task should have alteast one character or number.
       </div>
     </Container>

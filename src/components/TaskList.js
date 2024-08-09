@@ -13,14 +13,14 @@ const TaskList = () => {
     } else {
       return tasks;
     }
-  });
+  }); ///Filtering All task with respective options
   const dispatch = useDispatch();
   return (
     <Container>
       <Row className="justify-content-md-center">
         <Col xs={12} md={8}>
           {tasks.length === 0
-            ? <p>No Task Present....</p>
+            ? <p>No Task Present....</p> ///If no task present in the list
             : <ListGroup>
                 {tasks.map(task =>
                   <ListGroup.Item
