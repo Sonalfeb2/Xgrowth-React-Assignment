@@ -4,6 +4,7 @@ import { ListGroup, Container, Form, Button } from "react-bootstrap";
 import { taskActions } from "../store";
 
 const TaskList = () => {
+  const dispatch = useDispatch();
   const tasks = useSelector(state => {
     const { tasks, filter } = state.taskmanager;
     if (filter === "active") {
@@ -14,7 +15,19 @@ const TaskList = () => {
       return tasks;
     }
   }); ///Filtering All task with respective options
-  const dispatch = useDispatch();
+  const handleChange = (e, id) => {
+    const message = e.target.checked
+      ? "Marked Completed"
+      : "Marked Incompleted";
+    dispatch(taskActions.completeTask(id));
+    dispatch(taskActions.showNotification(message));
+    setTimeout(() => dispatch(taskActions.hideNotification()), 2000);
+  };
+  const handleDelete = id => {
+    dispatch(taskActions.deleteTask(id));
+    dispatch(taskActions.showNotification("Deleted Successfully"));
+    setTimeout(() => dispatch(taskActions.hideNotification()), 2000);
+  };
   return (
     <Container>
       {tasks.length === 0
@@ -29,30 +42,9 @@ const TaskList = () => {
                   type="checkbox"
                   label={task.text}
                   checked={task.completed}
-                  onChange={() => {
-                    dispatch(taskActions.completeTask(task.id));
-                    dispatch(
-                      taskActions.showNotification("Marked Completed")
-                    );
-                    setTimeout(
-                      () => dispatch(taskActions.hideNotification()),
-                      2000
-                    );
-                  }}
+                  onChange={e => handleChange(e, task.id)}
                 />
-                <Button
-                  variant="danger"
-                  onClick={() => {
-                    dispatch(taskActions.deleteTask(task.id));
-                    dispatch(
-                      taskActions.showNotification("Deleted Successfully")
-                    );
-                    setTimeout(
-                      () => dispatch(taskActions.hideNotification()),
-                      2000
-                    );
-                  }}
-                >
+                <Button variant="danger" onClick={() => handleDelete(task.id)}>
                   Delete
                 </Button>
               </ListGroup.Item>
