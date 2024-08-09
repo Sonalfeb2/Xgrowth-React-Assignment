@@ -11,8 +11,12 @@ const NewTask = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const text = newTaskInput.current.value;
-    dispatch(taskActions.addTask(text));
-    newTaskInput.current.value = " ";
+    if (text !== "") {
+      dispatch(taskActions.addTask(text));
+      newTaskInput.current.value = "";
+    } else {
+      setError(true);
+    }
   };
   const handleChange = () => {
     console.log("hi");
