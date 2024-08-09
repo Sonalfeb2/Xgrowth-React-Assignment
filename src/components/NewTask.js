@@ -42,6 +42,7 @@ const NewTask = () => {
               placeholder="Enter a new task..."
               ref={newTaskInput}
               onChange={handleChange}
+              onKeyDown={e => e.keyCode === 13 && handleSubmit}
             />
             <Button
               type="submit"
