@@ -11,13 +11,12 @@ function TaskFilter() {
     <Container>
       <Row className="justify-content-md-center mb-4">
         <Col xs={2}>
-          {isEmpty.length === 0
-            ? <p>No Task Found</p>
-            : <Form.Select onChange={e => handleChange(e.target.value)}>
-                <option value="all">All</option>
-                <option value="active">Active</option>
-                <option value="completed">Completed</option>
-              </Form.Select>}
+          {isEmpty.length !== 0 &&
+            <Form.Select onChange={e => handleChange(e.target.value)}>
+              <option value="all">All</option>
+              <option value="active">Active</option>
+              <option value="completed">Completed</option>
+            </Form.Select>}
         </Col>
       </Row>
     </Container>
