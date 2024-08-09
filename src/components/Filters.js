@@ -9,7 +9,7 @@ function TaskFilter() {
   };
   return (
     <Container>
-      <Row className="justify-content-md-center mb-4">
+      <Row className="mb-4">
         <Col xs={2}>
           {isEmpty.length !== 0 &&
             <Form.Select onChange={e => handleChange(e.target.value)}>

@@ -13,7 +13,8 @@ const loadState = () => {
 
 const initialState = {
   tasks: loadState(),
-  filter: "all"
+  filter: "all",
+  showMessage: false
 };
 
 const taskSlices = createSlice({
@@ -27,6 +28,7 @@ const taskSlices = createSlice({
         completed: false
       });
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
+      
     },
     completeTask: (state, action) => {
       const task = state.tasks.find(task => task.id === action.payload);
@@ -37,14 +39,20 @@ const taskSlices = createSlice({
     },
     deleteTask: (state, action) => {
       const task = state.tasks.filter(task => task.id !== action.payload);
-      state.tasks = task
+      state.tasks = task;
 
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
-    filterTask : (state,action)=>{
+    filterTask: (state, action) => {
       state.filter = action.payload;
-      
+    },
+    showNotification: (state, action)=>{
+      state.showMessage = {variant : 'info', title:action.payload}
+    },
+    hideNotification: (state)=>{
+      state.showMessage = false
     }
+
   }
 });
 
